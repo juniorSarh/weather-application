@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Locations() {
+export default function SideBar() {
   return (
     <div>
       
