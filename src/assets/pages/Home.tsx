@@ -1,14 +1,15 @@
 import React from 'react'
 import WeatherMain from '../components/WeatherMain'
+import { FaSun } from 'react-icons/fa'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+
 export default function Home() {
   return (
     <div>
-      <WeatherMain
-  status="Sunny"
-  temperature={28}
-  day="Monday"
-  icon="https://example.com/sunny-icon.png" // or a local icon path
-/>
+      <Header/>
+     <WeatherMain />
+     <Footer/>
     </div>
   )
 }

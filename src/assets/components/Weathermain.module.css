@@ -1,0 +1,9 @@
+.maincomponent {
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  padding: 1rem;
+  gap: 2rem;
+  font-family: sans-serif;
+  width: 100%;
+}
