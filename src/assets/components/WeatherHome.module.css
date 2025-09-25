@@ -86,3 +86,19 @@ li {
 li:hover {
   background-color: #eef2f7;
 }
+
+.loading {
+  text-align: center;
+  color: #555;
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+.condition {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-transform: capitalize;
+}
+
