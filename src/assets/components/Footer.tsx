@@ -6,7 +6,7 @@ interface FooterProps {
   text?: string;
 }
 
-const Footer: React.FC<FooterProps> = ({ text = 'Msunduzi • 22°C • Sunny' }) => {
+const Footer: React.FC<FooterProps> = ({ text = 'Weather App By Royalty Tech.' }) => {
   return (
     <footer className={styles.footer}>
       <WiCloud className={styles.icon} />
