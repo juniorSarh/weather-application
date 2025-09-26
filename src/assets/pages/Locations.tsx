@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react';
+
 import SavedLocations from '../components/SavedLocations';
 import type { SavedLocation } from '../../types';
 import Header from '../components/Header';

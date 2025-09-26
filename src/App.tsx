@@ -1,4 +1,4 @@
-import { useState } from 'react'
+
 import { Routes, Route } from 'react-router-dom'
 import Home from './assets/pages/Home'
 import Locations from './assets/pages/Locations'

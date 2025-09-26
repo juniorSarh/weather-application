@@ -1,4 +1,4 @@
-import React from 'react';
+
 import styles from './SettingsCard.module.css';
 import { useSettings } from '../context/SettingsContext'; // Make sure context is created
 

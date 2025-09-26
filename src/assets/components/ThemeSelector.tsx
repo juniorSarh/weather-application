@@ -1,6 +1,5 @@
 // components/ThemeSelector.tsx
 
-import React from 'react';
 import { useSettings } from '../context/SettingsContext';
 
 const ThemeSelector = () => {

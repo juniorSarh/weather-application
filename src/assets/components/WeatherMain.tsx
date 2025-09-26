@@ -1,4 +1,4 @@
-import React from 'react';
+
 import Sidebar from './SideBar';
 import WeatherHome from './WeatherHome';
 import styles from './WeatherMain.module.css'; // ✅ import the CSS module

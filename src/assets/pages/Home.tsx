@@ -1,4 +1,4 @@
-import React from 'react'
+
 import WeatherMain from '../components/WeatherMain'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
