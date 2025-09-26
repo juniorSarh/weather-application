@@ -1,0 +1,60 @@
+.settingsCard {
+  width: 50%;
+  height: 70%;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background-color: #fff;
+  color: #000;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-theme .settingsCard {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+.settingsHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.settingItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.unitButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.unitButtons button,
+.settingItem button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #ddd;
+  transition: background-color 0.2s;
+}
+
+.unitButtons button.active,
+.settingItem button.active {
+  background-color: #2196f3;
+  color: white;
+}
+
+body.dark-theme .unitButtons button {
+  background-color: #333;
+  color: white;
+}
+
+body.dark-theme .unitButtons button.active {
+  background-color: #2196f3;
+}
