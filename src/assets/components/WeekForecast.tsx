@@ -1,4 +1,4 @@
-import React from 'react';
+
 import styles from './WeekForecast.module.css';
 
 interface Props {

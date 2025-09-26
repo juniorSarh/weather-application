@@ -1,4 +1,4 @@
-import React from 'react';
+
 import styles from './Footer.module.css';
 import { WiCloud } from 'react-icons/wi';
 import { useSettings } from '../context/SettingsContext';

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import styles from './DayForecast.module.css';
 
 interface Props {
