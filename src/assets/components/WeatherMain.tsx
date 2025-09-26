@@ -1,12 +1,13 @@
 
 import Sidebar from './SideBar';
 import WeatherHome from './WeatherHome';
-import styles from './WeatherMain.module.css'; // ✅ import the CSS module
+import styles from './WeatherMain.module.css';
+
 
 export default function WeatherMain() {
   return (
     <>
-    <div className={styles.maincomponent}> {/* ✅ use CSS module class */}
+    <div className={styles.maincomponent}> 
       <Sidebar />
       <WeatherHome />
       
