@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './sidebar.module.css';
-import { FaHome, FaMapMarkerAlt, FaCity, FaCog } from 'react-icons/fa';
+import { FaHome, FaMapMarkerAlt, FaCog } from 'react-icons/fa';
+import { FaUser } from 'react-icons/fa6';
 
 const Sidebar: React.FC = () => {
   return (
@@ -14,13 +15,13 @@ const Sidebar: React.FC = () => {
         <FaMapMarkerAlt className={styles.navIcon} />
         <div>Locations</div>
       </Link>
-      <Link to="/cities" className={styles.navLink} title="Cities">
-        <FaCity className={styles.navIcon} />
-        <div>Cities</div>
-      </Link>
       <Link to="/settings" className={styles.navLink} title="Settings">
         <FaCog className={styles.navIcon} />
         <div>Settings</div>
+      </Link>
+      <Link to="/user" className={styles.navLink} title="Users">
+        <FaUser className={styles.navIcon} />
+        <div>Profile</div>
       </Link>
     </div>
   );

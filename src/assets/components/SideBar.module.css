@@ -3,12 +3,14 @@
   padding: 20px;
   border-right: 1px solid #cccccc;
   background-color: skyblue;
-  height:100vh;
+  height:140vh;
   box-sizing: border-box;
   margin: 2px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .navLink {

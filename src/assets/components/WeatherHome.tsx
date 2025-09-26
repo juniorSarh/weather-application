@@ -3,8 +3,11 @@ import styles from './WeatherHome.module.css';
 import WeekForecast from './WeekForecast';
 import DayForecast from './DayForecast';
 
+
 const API_KEY = 'cd80adfd71e8991d53ad29edd68abd19';
 const FALLBACK_CITY = 'Johannesburg';
+
+
 
 export default function WeatherHome() {
   const [city, setCity] = useState('');
@@ -13,6 +16,9 @@ export default function WeatherHome() {
   const [error, setError] = useState('');
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+
+
 
   // ✅ Save city to localStorage
   const saveLastCity = (cityName: string) => {
