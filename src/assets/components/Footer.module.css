@@ -20,3 +20,8 @@
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.darkFooter {
+  background: linear-gradient(to right, #1f1f1f, #2c2c2c);
+  color: #e0e0e0;
+}

@@ -3,7 +3,7 @@
   padding: 20px;
   border-right: 1px solid #cccccc;
   background-color: skyblue;
-  height:140vh;
+  height: 140vh;
   box-sizing: border-box;
   margin: 2px;
   display: flex;
@@ -33,4 +33,11 @@
 .navIcon {
   font-size: 24px;
   margin-bottom: 4px;
+}
+
+.darkSidebar {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  border-right: 1px solid #444;
+  
 }

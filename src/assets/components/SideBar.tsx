@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './sidebar.module.css';
-import { FaHome, FaMapMarkerAlt, FaCog } from 'react-icons/fa';
-import { FaUser } from 'react-icons/fa6';
+import { useSettings } from '../context/SettingsContext';
+import { FaHome, FaMapMarkerAlt, FaCog, FaUser } from 'react-icons/fa';
 
 const Sidebar: React.FC = () => {
+  const { isDarkTheme } = useSettings();
+
   return (
-    <div className={styles.sidebar}>
+    <div className={`${styles.sidebar} ${isDarkTheme ? styles.darkSidebar : ''}`}>
       <Link to="/" className={styles.navLink} title="Home">
         <FaHome className={styles.navIcon} />
         <div>Home</div>

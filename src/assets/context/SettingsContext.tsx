@@ -1,51 +1,59 @@
+// context/SettingsContext.tsx
+
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-type TemperatureUnit = 'celsius' | 'fahrenheit';
+type UnitType = 'celsius' | 'fahrenheit';
 
-interface SettingsContextType {
+interface SettingsContextProps {
   isDarkTheme: boolean;
   toggleTheme: () => void;
-  unit: TemperatureUnit;
-  setUnit: (unit: TemperatureUnit) => void;
+  unit: UnitType;
+  setUnit: (unit: UnitType) => void;
   notificationsEnabled: boolean;
   toggleNotifications: () => void;
 }
 
-const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
+const SettingsContext = createContext<SettingsContextProps | undefined>(undefined);
 
-const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+ const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
-  const [unit, setUnitState] = useState<TemperatureUnit>('celsius');
+  const [unit, setUnit] = useState<UnitType>('celsius');
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
 
+  // On load, check theme and units
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
-    const savedUnit = localStorage.getItem('unit');
-    const savedNotify = localStorage.getItem('weatherNotifications');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const useDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
 
-    setIsDarkTheme(savedTheme === 'dark');
-    if (savedUnit === 'fahrenheit') setUnitState('fahrenheit');
-    setNotificationsEnabled(savedNotify !== 'off');
+    setIsDarkTheme(useDark);
+    document.body.classList.toggle('dark-theme', useDark);
+
+    const savedUnit = localStorage.getItem('unit') as UnitType;
+    if (savedUnit === 'fahrenheit' || savedUnit === 'celsius') {
+      setUnit(savedUnit);
+    }
+
+    const savedNotifications = localStorage.getItem('notificationsEnabled');
+    setNotificationsEnabled(savedNotifications !== 'false');
   }, []);
 
-  useEffect(() => {
-    document.body.classList.toggle('dark-theme', isDarkTheme);
-    localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
-  }, [isDarkTheme]);
-
   const toggleTheme = () => {
-    setIsDarkTheme(prev => !prev);
-  };
-
-  const setUnit = (newUnit: TemperatureUnit) => {
-    setUnitState(newUnit);
-    localStorage.setItem('unit', newUnit);
+    const newTheme = !isDarkTheme;
+    setIsDarkTheme(newTheme);
+    document.body.classList.toggle('dark-theme', newTheme);
+    localStorage.setItem('theme', newTheme ? 'dark' : 'light');
   };
 
   const toggleNotifications = () => {
-    const enabled = !notificationsEnabled;
-    setNotificationsEnabled(enabled);
-    localStorage.setItem('weatherNotifications', enabled ? 'on' : 'off');
+    const newValue = !notificationsEnabled;
+    setNotificationsEnabled(newValue);
+    localStorage.setItem('notificationsEnabled', String(newValue));
+  };
+
+  const updateUnit = (newUnit: UnitType) => {
+    setUnit(newUnit);
+    localStorage.setItem('unit', newUnit);
   };
 
   return (
@@ -54,7 +62,7 @@ const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ children })
         isDarkTheme,
         toggleTheme,
         unit,
-        setUnit,
+        setUnit: updateUnit,
         notificationsEnabled,
         toggleNotifications,
       }}
@@ -71,5 +79,4 @@ export const useSettings = () => {
   }
   return context;
 };
-
 export default SettingsProvider
