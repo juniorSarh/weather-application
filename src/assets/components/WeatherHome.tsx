@@ -1,49 +1,69 @@
-import { useEffect, useState } from 'react';
-import styles from './WeatherHome.module.css';
-import WeekForecast from './WeekForecast';
-import DayForecast from './DayForecast';
-import type { SavedLocation } from '../../types';
+import { useEffect, useState } from "react";
+import styles from "./WeatherHome.module.css";
+import WeekForecast from "./WeekForecast";
+import DayForecast from "./DayForecast";
+import type { SavedLocation } from "../../types";
 
-const API_KEY = 'cd80adfd71e8991d53ad29edd68abd19';
-const FALLBACK_CITY = 'Johannesburg';
+/** ===== Types for OpenWeather responses (minimal fields you use) ===== */
+type WeatherNow = {
+  name: string;
+  coord: { lat: number; lon: number };
+  main: { temp: number; humidity?: number };
+  wind: { speed: number };
+  weather: Array<{ description: string; icon: string }>;
+};
+
+type ForecastItem = {
+  dt_txt: string; // "YYYY-MM-DD HH:mm:ss"
+  main: { temp: number };
+  weather: Array<{ description: string; icon: string }>;
+};
+
+type Forecast5d = {
+  list: ForecastItem[];
+};
+
+/** ===== Env + constants ===== */
+const API_KEY =
+  import.meta.env.VITE_OPENWEATHER_KEY || "cd80adfd71e8991d53ad29edd68abd19";
+const FALLBACK_CITY = "Johannesburg";
 
 export default function WeatherHome() {
-  const [city, setCity] = useState('');
-  const [weatherData, setWeatherData] = useState<any>(null);
-  const [forecastData, setForecastData] = useState<any>(null);
-  const [error, setError] = useState('');
+  const [city, setCity] = useState<string>("");
+  const [weatherData, setWeatherData] = useState<WeatherNow | null>(null);
+  const [forecastData, setForecastData] = useState<Forecast5d | null>(null);
+  const [error, setError] = useState<string>("");
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [savedLocations, setSavedLocations] = useState<SavedLocation[]>([]);
 
   // ✅ Save city to localStorage
   const saveLastCity = (cityName: string) => {
-    localStorage.setItem('lastCity', cityName);
+    localStorage.setItem("lastCity", cityName);
   };
 
   // ✅ Save list of saved locations
   const saveLocationsToStorage = (locations: SavedLocation[]) => {
-    localStorage.setItem('savedLocations', JSON.stringify(locations));
+    localStorage.setItem("savedLocations", JSON.stringify(locations));
   };
 
   // ✅ Load saved locations from storage
   const loadSavedLocations = () => {
-    const saved = localStorage.getItem('savedLocations');
+    const saved = localStorage.getItem("savedLocations");
     if (saved) {
       try {
-        setSavedLocations(JSON.parse(saved));
+        setSavedLocations(JSON.parse(saved) as SavedLocation[]);
       } catch (err) {
-        console.error('Failed to parse saved locations:', err);
+        console.error("Failed to parse saved locations:", err);
       }
     }
   };
 
   // ✅ Save current city to saved list
   const handleSaveCity = () => {
-    if (!weatherData || !weatherData.name) return;
-
+    if (!weatherData?.name) return;
     const cityName = weatherData.name;
-    const alreadySaved = savedLocations.some(loc => loc.name === cityName);
+    const alreadySaved = savedLocations.some((loc) => loc.name === cityName);
 
     if (!alreadySaved) {
       const updatedLocations = [...savedLocations, { name: cityName }];
@@ -54,12 +74,13 @@ export default function WeatherHome() {
 
   useEffect(() => {
     loadSavedLocations();
-    const lastCity = localStorage.getItem('lastCity');
+    const lastCity = localStorage.getItem("lastCity");
     if (lastCity) {
-      fetchWeatherByCity(lastCity);
+      void fetchWeatherByCity(lastCity);
     } else {
       fetchWeatherByLocation();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchWeatherByCity = async (cityName: string) => {
@@ -67,24 +88,36 @@ export default function WeatherHome() {
     setLoading(true);
 
     try {
-      const currentUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`;
+      const currentUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
+        cityName
+      )}&appid=${encodeURIComponent(API_KEY)}&units=metric`;
+
       const currentRes = await fetch(currentUrl);
-      if (!currentRes.ok) throw new Error('City not found');
-      const currentData = await currentRes.json();
+      if (!currentRes.ok) throw new Error("City not found");
+
+      const currentData = (await currentRes.json()) as WeatherNow;
       setWeatherData(currentData);
       saveLastCity(cityName);
 
-      const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&appid=${API_KEY}&units=metric`;
+      const { lat, lon } = currentData.coord;
+      const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${encodeURIComponent(
+        API_KEY
+      )}&units=metric`;
+
       const forecastRes = await fetch(forecastUrl);
-      const forecastJson = await forecastRes.json();
+      if (!forecastRes.ok) throw new Error("Failed to fetch forecast");
+
+      const forecastJson = (await forecastRes.json()) as Forecast5d;
       setForecastData(forecastJson);
 
-      const firstDate = forecastJson.list[0].dt_txt.split(' ')[0];
+      const firstDate = forecastJson.list?.[0]?.dt_txt?.split(" ")[0] ?? null;
       setSelectedDate(firstDate);
-      setError('');
-    } catch (err: any) {
+      setError("");
+    } catch (err: unknown) {
       console.error(err);
-      setError(err.message || 'Failed to fetch data');
+      const message =
+        err instanceof Error ? err.message : "Failed to fetch data";
+      setError(message);
       setWeatherData(null);
       setForecastData(null);
     } finally {
@@ -94,7 +127,7 @@ export default function WeatherHome() {
 
   const fetchWeatherByLocation = () => {
     if (!navigator.geolocation) {
-      fetchWeatherByCity(FALLBACK_CITY);
+      void fetchWeatherByCity(FALLBACK_CITY);
       return;
     }
 
@@ -105,39 +138,53 @@ export default function WeatherHome() {
         const { latitude, longitude } = position.coords;
 
         try {
-          const currentUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`;
+          const currentUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${encodeURIComponent(
+            API_KEY
+          )}&units=metric`;
+
           const currentRes = await fetch(currentUrl);
-          if (!currentRes.ok) throw new Error('Failed to get current weather');
-          const currentData = await currentRes.json();
+          if (!currentRes.ok) throw new Error("Failed to get current weather");
+
+          const currentData = (await currentRes.json()) as WeatherNow;
           setWeatherData(currentData);
           saveLastCity(currentData.name);
 
-          const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`;
+          const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${encodeURIComponent(
+            API_KEY
+          )}&units=metric`;
+
           const forecastRes = await fetch(forecastUrl);
-          const forecastJson = await forecastRes.json();
+          if (!forecastRes.ok) throw new Error("Failed to get forecast");
+
+          const forecastJson = (await forecastRes.json()) as Forecast5d;
           setForecastData(forecastJson);
 
-          const firstDate = forecastJson.list[0].dt_txt.split(' ')[0];
+          const firstDate =
+            forecastJson.list?.[0]?.dt_txt?.split(" ")[0] ?? null;
           setSelectedDate(firstDate);
-          setError('');
-        } catch (err: any) {
+          setError("");
+        } catch (err: unknown) {
           console.error(err);
-          setError(err.message || 'Failed to fetch location data');
-          fetchWeatherByCity(FALLBACK_CITY);
+          const message =
+            err instanceof Error
+              ? err.message
+              : "Failed to fetch location data";
+          setError(message);
+          void fetchWeatherByCity(FALLBACK_CITY);
         } finally {
           setLoading(false);
         }
       },
-      (err) => {
-        console.error('Geolocation error:', err);
-        setError('Location access denied. Using fallback city.');
-        fetchWeatherByCity(FALLBACK_CITY);
+      (geoErr: GeolocationPositionError) => {
+        console.error("Geolocation error:", geoErr);
+        setError("Location access denied. Using fallback city.");
+        void fetchWeatherByCity(FALLBACK_CITY);
       }
     );
   };
 
   const handleSearch = () => {
-    fetchWeatherByCity(city);
+    void fetchWeatherByCity(city);
   };
 
   return (
@@ -166,10 +213,10 @@ export default function WeatherHome() {
           <p>🌡️ Temperature: {weatherData.main.temp}°C</p>
           <div className={styles.condition}>
             <img
-              src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
-              alt={weatherData.weather[0].description}
+              src={`https://openweathermap.org/img/wn/${weatherData.weather?.[0]?.icon}@2x.png`}
+              alt={weatherData.weather?.[0]?.description ?? "weather icon"}
             />
-            <p>{weatherData.weather[0].description}</p>
+            <p>{weatherData.weather?.[0]?.description}</p>
           </div>
           <p>💨 Wind: {weatherData.wind.speed} m/s</p>
 
@@ -182,7 +229,10 @@ export default function WeatherHome() {
       {!loading && forecastData && selectedDate && (
         <>
           <DayForecast forecastData={forecastData} />
-          <WeekForecast forecastData={forecastData} onSelectDay={setSelectedDate} />
+          <WeekForecast
+            forecastData={forecastData}
+            onSelectDay={setSelectedDate}
+          />
         </>
       )}
     </div>
