@@ -1,20 +1,21 @@
+/* 🌐 Base styles: Mobile-first (starting at 320px) */
 .sidebar {
-  width: 100%; /* Full width on small screens */
+  width: 100%; /* Full width by default */
   padding: 20px;
-  border-right: 1px solid #cccccc;
-  background-color: skyblue;
-  height: auto; /* Let height adjust naturally */
-  box-sizing: border-box;
   margin: 2px 0;
+  box-sizing: border-box;
+  height: auto;
   display: flex;
-  flex-direction: row; /* Horizontal layout on small screens */
+  flex-direction: row; /* Horizontal on small screens */
   align-items: center;
+  background: linear-gradient(to right, #00f2fe, #4facfe);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  overflow-x: auto; /* Scroll if overflow on very small screens */
+  border-right: 1px solid #cccccc;
+  overflow-x: auto; /* Allow scroll if too many items */
 }
 
-/* Sidebar navigation links */
+/* Navigation links (mobile-first) */
 .navLink {
   display: flex;
   flex-direction: column;
@@ -25,7 +26,7 @@
   margin-right: 1rem;
   border-radius: 8px;
   transition: background-color 0.2s ease;
-  min-width: 70px; /* Ensures clickable area */
+  min-width: 70px; /* Better tap target */
 }
 
 .navLink:hover {
@@ -37,30 +38,32 @@
   margin-bottom: 4px;
 }
 
-/* Dark theme variant */
+/* 🌙 Optional: Dark theme override */
 .darkSidebar {
   background-color: #1e1e1e;
   color: #f1f1f1;
   border-right: 1px solid #444;
 }
 
-/* Medium devices (tablets and up) */
+/* 📱 Tablets and up (≥768px) */
 @media (min-width: 768px) {
   .sidebar {
     width: 25%;
     flex-direction: column; /* Vertical layout */
     height: 140vh;
     margin: 2px;
+    align-items: flex-start;
   }
 
   .navLink {
-    margin-bottom: 10px;
-    margin-right: 0;
     width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+    justify-content: flex-start;
   }
 }
 
-/* Large devices (desktops and up) */
+/* 💻 Desktops and up (≥1024px) */
 @media (min-width: 1024px) {
   .sidebar {
     width: 20%;

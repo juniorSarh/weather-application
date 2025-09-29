@@ -1,13 +1,14 @@
+/* 🌐 Base styles: Mobile-first (320px and up) */
 .settingsCard {
-  width: 70%;
-  height: 70%;
-  margin: 15px;
-  padding: 1.5rem;
+  width: 100%;
+  margin: 1rem;
+  padding: 1.25rem;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   background-color: #fff;
   color: #000;
   transition: background-color 0.3s, color 0.3s;
+  box-sizing: border-box;
 }
 
 body.dark-theme .settingsCard {
@@ -20,6 +21,7 @@ body.dark-theme .settingsCard {
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 
 .settingItem {
@@ -27,11 +29,14 @@ body.dark-theme .settingsCard {
   justify-content: space-between;
   align-items: center;
   margin: 1rem 0;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 }
 
 .unitButtons {
   display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .unitButtons button,
@@ -50,11 +55,36 @@ body.dark-theme .settingsCard {
   color: white;
 }
 
-body.dark-theme .unitButtons button {
+/* Dark theme button overrides */
+body.dark-theme .unitButtons button,
+body.dark-theme .settingItem button {
   background-color: #333;
   color: white;
 }
 
-body.dark-theme .unitButtons button.active {
+body.dark-theme .unitButtons button.active,
+body.dark-theme .settingItem button.active {
   background-color: #2196f3;
+  color: white;
+}
+
+/* 📱 Tablets (≥ 600px) */
+@media (min-width: 600px) {
+  .settingsCard {
+    width: 80%;
+    padding: 1.5rem;
+  }
+
+  .settingItem {
+    flex-wrap: nowrap;
+    gap: 2rem;
+  }
+}
+
+/* 💻 Desktops (≥ 1024px) */
+@media (min-width: 1024px) {
+  .settingsCard {
+    width: 70%;
+    height: 70%;
+  }
 }

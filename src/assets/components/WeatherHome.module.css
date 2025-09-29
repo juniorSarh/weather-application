@@ -1,24 +1,22 @@
-/* Container styling */
+/* Base styles (mobile-first) */
 .container {
   width: 100%;
   margin: 15px;
   padding: 1.5rem;
-  background: #f7f9fc;
+  background: linear-gradient(to right, #00f2fe, #4facfe);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  max-width: 600px; /*max width for small devices */
+  max-width: 600px;
 }
 
-/* Title */
 .title {
   text-align: center;
   font-size: 1.5rem;
   margin-bottom: 1.2rem;
-  color: #333;
+  color: #f8f8f8;
 }
 
-/* Input + button group */
 .inputGroup {
   display: flex;
   flex-direction: column;
@@ -51,7 +49,6 @@
   background-color: #357bd8;
 }
 
-/* Error message */
 .error {
   color: #d33;
   text-align: center;
@@ -59,7 +56,6 @@
   margin-bottom: 1rem;
 }
 
-/* Weather information */
 .weatherInfo {
   background-color: #fff;
   border-radius: 8px;
@@ -74,7 +70,6 @@
   color: #222;
 }
 
-/* Forecast list styles */
 ul {
   list-style: none;
   padding: 0;
@@ -106,7 +101,31 @@ li:hover {
   text-transform: capitalize;
 }
 
-/* Medium devices (tablets) */
+/* 📱 Small devices - from 320px upward (optional override) */
+@media (min-width: 320px) {
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .input {
+    font-size: 0.95rem;
+  }
+
+  .button {
+    font-size: 0.95rem;
+  }
+
+  .weatherTitle {
+    font-size: 1.1rem;
+  }
+
+  .container {
+    padding: 1rem;
+    margin: 10px;
+  }
+}
+
+/* 📱 Medium devices (tablets) */
 @media (min-width: 768px) {
   .container {
     width: 85%;
@@ -136,11 +155,11 @@ li:hover {
   }
 }
 
-/* Large devices (desktops) */
+/* 💻 Large devices (desktops) */
 @media (min-width: 1024px) {
   .container {
     width: 70%;
-    max-width: 1000px;
+    max-width: 2000px;
   }
 
   .title {
