@@ -2,12 +2,10 @@ import { useEffect, useState } from 'react';
 import styles from './WeatherHome.module.css';
 import WeekForecast from './WeekForecast';
 import DayForecast from './DayForecast';
-
+import type { SavedLocation } from '../../types';
 
 const API_KEY = 'cd80adfd71e8991d53ad29edd68abd19';
 const FALLBACK_CITY = 'Johannesburg';
-
-
 
 export default function WeatherHome() {
   const [city, setCity] = useState('');
@@ -16,17 +14,46 @@ export default function WeatherHome() {
   const [error, setError] = useState('');
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-
-
-
+  const [savedLocations, setSavedLocations] = useState<SavedLocation[]>([]);
 
   // ✅ Save city to localStorage
   const saveLastCity = (cityName: string) => {
     localStorage.setItem('lastCity', cityName);
   };
 
-  // ✅ Load from localStorage on mount
+  // ✅ Save list of saved locations
+  const saveLocationsToStorage = (locations: SavedLocation[]) => {
+    localStorage.setItem('savedLocations', JSON.stringify(locations));
+  };
+
+  // ✅ Load saved locations from storage
+  const loadSavedLocations = () => {
+    const saved = localStorage.getItem('savedLocations');
+    if (saved) {
+      try {
+        setSavedLocations(JSON.parse(saved));
+      } catch (err) {
+        console.error('Failed to parse saved locations:', err);
+      }
+    }
+  };
+
+  // ✅ Save current city to saved list
+  const handleSaveCity = () => {
+    if (!weatherData || !weatherData.name) return;
+
+    const cityName = weatherData.name;
+    const alreadySaved = savedLocations.some(loc => loc.name === cityName);
+
+    if (!alreadySaved) {
+      const updatedLocations = [...savedLocations, { name: cityName }];
+      setSavedLocations(updatedLocations);
+      saveLocationsToStorage(updatedLocations);
+    }
+  };
+
   useEffect(() => {
+    loadSavedLocations();
     const lastCity = localStorage.getItem('lastCity');
     if (lastCity) {
       fetchWeatherByCity(lastCity);
@@ -35,7 +62,6 @@ export default function WeatherHome() {
     }
   }, []);
 
-  // ✅ Fetch weather by city
   const fetchWeatherByCity = async (cityName: string) => {
     if (!cityName) return;
     setLoading(true);
@@ -66,7 +92,6 @@ export default function WeatherHome() {
     }
   };
 
-  // ✅ Fetch weather by current location
   const fetchWeatherByLocation = () => {
     if (!navigator.geolocation) {
       fetchWeatherByCity(FALLBACK_CITY);
@@ -111,7 +136,6 @@ export default function WeatherHome() {
     );
   };
 
-  // ✅ Manual search
   const handleSearch = () => {
     fetchWeatherByCity(city);
   };
@@ -120,7 +144,6 @@ export default function WeatherHome() {
     <div className={styles.container}>
       <h1 className={styles.title}>Weather App</h1>
 
-      {/* Search input */}
       <div className={styles.inputGroup}>
         <input
           type="text"
@@ -134,32 +157,31 @@ export default function WeatherHome() {
         </button>
       </div>
 
-      {/* Error message */}
       {error && <p className={styles.error}>{error}</p>}
-
-      {/* Loading state */}
       {loading && <p className={styles.loading}>Loading weather...</p>}
 
-      {/* Current weather */}
       {!loading && weatherData && (
         <div className={styles.weatherInfo}>
           <h2 className={styles.weatherTitle}>{weatherData.name}</h2>
           <p>🌡️ Temperature: {weatherData.main.temp}°C</p>
           <div className={styles.condition}>
-  <img
-    src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
-    alt={weatherData.weather[0].description}
-  />
-  <p>{weatherData.weather[0].description}</p>
-</div>
+            <img
+              src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
+              alt={weatherData.weather[0].description}
+            />
+            <p>{weatherData.weather[0].description}</p>
+          </div>
           <p>💨 Wind: {weatherData.wind.speed} m/s</p>
+
+          <button className={styles.saveButton} onClick={handleSaveCity}>
+            ⭐ Save Location
+          </button>
         </div>
       )}
 
-      {/* Forecast */}
       {!loading && forecastData && selectedDate && (
         <>
-          <DayForecast forecastData={forecastData}/>
+          <DayForecast forecastData={forecastData} />
           <WeekForecast forecastData={forecastData} onSelectDay={setSelectedDate} />
         </>
       )}

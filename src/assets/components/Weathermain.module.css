@@ -1,27 +1,28 @@
-/* Mobile-first base styles (320px and up) */
+/* 🌐 Base styles (Mobile-first: 320px and up) */
 .maincomponent {
   display: flex;
-  flex-direction: column;  /* stack by default on small screens */
-  align-items: stretch;
+  flex-direction: column;         /* Stack vertically by default */
+  align-items: stretch;           /* Stretch children to fit full width */
   padding: 0.5rem 1rem;
   gap: 1rem;
   font-family: sans-serif;
   width: 100%;
-  height: auto;
+  height: auto;                   /* Allow natural height growth */
+  box-sizing: border-box;
 }
 
-/* Medium screens: tablets (≥ 481px) */
+/* 📱 Tablets (≥ 481px) */
 @media (min-width: 481px) {
   .maincomponent {
-    flex-direction: row;
-    align-items: center;
+    flex-direction: row;          /* Side-by-side layout */
+    align-items: center;          /* Vertically center items */
     gap: 1.5rem;
     padding: 1rem;
     height: 100%;
   }
 }
 
-/* Large screens: desktops (≥ 768px) */
+/* 💻 Desktops (≥ 768px) */
 @media (min-width: 768px) {
   .maincomponent {
     gap: 2rem;

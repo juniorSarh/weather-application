@@ -1,61 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import type { SavedLocation } from '../../types'; // or wherever it's located
+// components/SavedLocations.tsx
+import React from 'react';
+import type { SavedLocation } from '../../types';
+import styles from './SavedLocations.module.css'; // Styling we'll create below
 
-type SavedLocationsProps = {
+export type SavedLocationsProps = {
+  locations: SavedLocation[];
   onSelect: (location: SavedLocation) => void;
+  onDelete: (location: SavedLocation) => void;
 };
 
-const LOCAL_STORAGE_KEY = 'savedLocations';
-
-const SavedLocations: React.FC<SavedLocationsProps> = ({ onSelect }) => {
-  const [savedLocations, setSavedLocations] = useState<SavedLocation[]>([]);
-
-  useEffect(() => {
-    const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
-    if (stored) {
-      setSavedLocations(JSON.parse(stored));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedLocations));
-  }, [savedLocations]);
-
-  const handleLocationSelect = (location: SavedLocation) => {
-    onSelect(location);
-  };
-
-  const handleLocationDelete = (name: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setSavedLocations(savedLocations.filter(loc => loc.name !== name));
-  };
+export default function SavedLocations({ locations, onSelect, onDelete }: SavedLocationsProps) {
+  if (!locations.length) {
+    return <p className={styles.empty}>No saved locations.</p>;
+  }
 
   return (
-    <>
-      {savedLocations.length > 0 && (
-        <div className="saved-locations">
-          <h3 className="section-title">Saved Locations</h3>
-          <div className="locations-list">
-            {savedLocations.map((location, index) => (
-              <div
-                key={index}
-                className="location-card"
-                onClick={() => handleLocationSelect(location)}
-              >
-                <span>{location.name}</span>
-                <button
-                  className="delete-btn"
-                  onClick={(e) => handleLocationDelete(location.name, e)}
-                >
-                  ×
-                </button>
-              </div>
-            ))}
+    <div className={styles.container}>
+      {locations.map((location) => (
+        <div key={location.name} className={styles.card}>
+          <h3 className={styles.cityName}>{location.name}</h3>
+          <div className={styles.actions}>
+            <button className={styles.viewButton} onClick={() => onSelect(location)}>
+              View
+            </button>
+            <button className={styles.deleteButton} onClick={() => onDelete(location)}>
+              Delete
+            </button>
           </div>
         </div>
-      )}
-    </>
+      ))}
+    </div>
   );
-};
-
-export default SavedLocations;
+}

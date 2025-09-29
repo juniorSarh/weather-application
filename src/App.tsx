@@ -10,7 +10,6 @@ function App() {
     <>
     <Routes>
     <Route path='' element={<Home/>}/>
-  
     <Route path='/locations' element={<Locations/>}/>
     <Route path='/settings' element={<Settings/>}/> 
      </Routes>

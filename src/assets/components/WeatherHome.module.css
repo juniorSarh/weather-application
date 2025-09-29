@@ -1,13 +1,14 @@
-/* Base styles (mobile-first) */
+/* ✅ Base styles (Mobile-first, 320px and up) */
 .container {
   width: 100%;
-  margin: 15px;
+  max-width: 600px;
+  margin: 15px auto; /* Center the container horizontally */
   padding: 1.5rem;
   background: linear-gradient(to right, #00f2fe, #4facfe);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  max-width: 600px;
+  box-sizing: border-box;
 }
 
 .title {
@@ -23,6 +24,13 @@
   gap: 0.75rem;
   justify-content: center;
   margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.input,
+.button {
+  width: 100%; /* full width on small screens */
+  box-sizing: border-box;
 }
 
 .input {
@@ -30,7 +38,6 @@
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 1rem;
-  width: 100%;
 }
 
 .button {
@@ -42,7 +49,6 @@
   cursor: pointer;
   font-weight: 500;
   transition: background 0.3s ease;
-  width: 100%;
 }
 
 .button:hover {
@@ -69,6 +75,21 @@
   margin-bottom: 1rem;
   color: #222;
 }
+
+.saveButton {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.saveButton:hover {
+  background-color: #388e3c;
+}
+
 
 ul {
   list-style: none;
@@ -101,31 +122,18 @@ li:hover {
   text-transform: capitalize;
 }
 
-/* 📱 Small devices - from 320px upward (optional override) */
-@media (min-width: 320px) {
-  .title {
-    font-size: 1.25rem;
-  }
-
+/* 🔒 Specific safeguard for very small screens */
+@media (max-width: 374px) {
   .input {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
   }
 
   .button {
-    font-size: 0.95rem;
-  }
-
-  .weatherTitle {
-    font-size: 1.1rem;
-  }
-
-  .container {
-    padding: 1rem;
-    margin: 10px;
+    font-size: 0.85rem;
   }
 }
 
-/* 📱 Medium devices (tablets) */
+/* 📱 Medium devices (≥768px) */
 @media (min-width: 768px) {
   .container {
     width: 85%;
@@ -155,7 +163,7 @@ li:hover {
   }
 }
 
-/* 💻 Large devices (desktops) */
+/* 💻 Large devices (≥1024px) */
 @media (min-width: 1024px) {
   .container {
     width: 70%;

@@ -1,0 +1,16 @@
+.locationsMain {
+  display: flex;
+  flex-direction: row;
+  height: 865px;
+  overflow: hidden;
+  width: 100vh;
+}
+
+.sidebarWrapper {
+  width: 850px;
+}
+.savedLocationsWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 80vh;
+}
