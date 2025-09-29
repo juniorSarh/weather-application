@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom';
-import styles from './sidebar.module.css';
+import styles from './SideBar.module.css';
 import { useSettings } from '../context/SettingsContext';
 import { FaHome, FaMapMarkerAlt, FaCog, FaUser } from 'react-icons/fa';
 
