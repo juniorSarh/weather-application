@@ -1,5 +1,4 @@
 // components/SavedLocations.tsx
-import React from 'react';
 import type { SavedLocation } from '../../types';
 import styles from './SavedLocations.module.css'; // Styling we'll create below
 
