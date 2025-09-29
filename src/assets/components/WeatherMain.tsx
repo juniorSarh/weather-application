@@ -1,7 +1,7 @@
 
 import Sidebar from './SideBar';
 import WeatherHome from './WeatherHome';
-import styles from './WeatherMain.module.css';
+import styles from './Weathermain.module.css';
 
 
 
