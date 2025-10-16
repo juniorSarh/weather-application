@@ -174,3 +174,181 @@ li:hover {
     font-size: 2rem;
   }
 }
+/* ✅ Base styles (Mobile-first, 320px and up) */
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin: 15px auto; /* Center the container horizontally */
+  padding: 1.5rem;
+  background: linear-gradient(to right, #00f2fe, #4facfe);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.2rem;
+  color: #f8f8f8;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.input,
+.button {
+  width: 100%; /* full width on small screens */
+  box-sizing: border-box;
+}
+
+.input {
+  padding: 0.6rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.button {
+  padding: 0.6rem 1.2rem;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background-color: #357bd8;
+}
+
+.error {
+  color: #d33;
+  text-align: center;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+}
+
+.weatherInfo {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  text-align: center;
+}
+
+.weatherTitle {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.saveButton {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.saveButton:hover {
+  background-color: #388e3c;
+}
+
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: #eef2f7;
+}
+
+.loading {
+  text-align: center;
+  color: #555;
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+.condition {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-transform: capitalize;
+}
+
+/* 🔒 Specific safeguard for very small screens */
+@media (max-width: 374px) {
+  .input {
+    font-size: 0.85rem;
+  }
+
+  .button {
+    font-size: 0.85rem;
+  }
+}
+
+/* 📱 Medium devices (≥768px) */
+@media (min-width: 768px) {
+  .container {
+    width: 85%;
+    padding: 2rem;
+    max-width: 800px;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .inputGroup {
+    flex-direction: row;
+  }
+
+  .input {
+    flex: 1;
+    width: auto;
+  }
+
+  .button {
+    width: auto;
+  }
+
+  .weatherTitle {
+    font-size: 1.5rem;
+  }
+}
+
+/* 💻 Large devices (≥1024px) */
+@media (min-width: 1024px) {
+  .container {
+    width: 70%;
+    max-width: 2000px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+}
+
+/* remove dark dashboard additions - revert to original up to line 176 */

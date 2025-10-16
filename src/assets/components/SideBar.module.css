@@ -1,18 +1,16 @@
 /* 🌐 Base styles: Mobile-first (starting at 320px) */
 .sidebar {
-  width: 100%; /* Full width by default */
-  padding: 20px;
+  width: 100%;
+  padding: 12px;
   margin: 2px 0;
   box-sizing: border-box;
   height: auto;
   display: flex;
   flex-direction: row; /* Horizontal on small screens */
   align-items: center;
-  background: linear-gradient(to right, #00f2fe, #4facfe);
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border-right: 1px solid #cccccc;
-  
+  background: #0b1220;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
 }
 
 /* Navigation links (mobile-first) */
@@ -20,53 +18,38 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 8px;
+  padding: 10px 8px;
   text-decoration: none;
-  color: black;
-  margin-right: 1rem;
-  border-radius: 8px;
+  color: #e5e7eb;
+  margin-right: 0.5rem;
+  border-radius: 10px;
   transition: background-color 0.2s ease;
-  min-width: 70px; /* Better tap target */
+  min-width: 60px;
 }
 
-.navLink:hover {
-  background-color: #f0f0f0;
-}
+.navLink:hover { background-color: #0f172a; }
 
-.navIcon {
-  font-size: 24px;
-  margin-bottom: 4px;
-}
+.navIcon { font-size: 22px; margin-bottom: 4px; }
 
 /* 🌙 Optional: Dark theme override */
-.darkSidebar {
-  background-color: #1e1e1e;
-  color: #f1f1f1;
-  border-right: 1px solid #444;
-}
+.darkSidebar { background-color: #0b1220; color: #f1f1f1; border-right: 1px solid #1f2937; }
 
 /* 📱 Tablets and up (≥768px) */
 @media (min-width: 768px) {
   .sidebar {
-    width: 25%;
+    width: 88px;
     flex-direction: column; /* Vertical layout */
-    height: 140vh;
-    margin: 2px;
-    align-items: flex-start;
+    height: 95vh;
+    margin: 4px;
+    align-items: center;
+    position: sticky;
+    top: 6px;
   }
 
-  .navLink {
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 10px;
-    justify-content: flex-start;
-  }
+  .navLink { width: 100%; margin-right: 0; margin-bottom: 8px; justify-content: center; }
 }
 
 /* 💻 Desktops and up (≥1024px) */
 @media (min-width: 1024px) {
-  .sidebar {
-    width: 20%;
-    height: 165vh;
-  }
+  .sidebar { width: 88px; height: 96vh; }
 }
