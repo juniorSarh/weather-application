@@ -3,6 +3,9 @@ import styles from "./WeatherHome.module.css";
 import WeekForecast from "./WeekForecast";
 import DayForecast from "./DayForecast";
 import type { SavedLocation } from "../../types";
+import { useSettings } from "../context/SettingsContext";
+import { formatTemp } from "../utils/units";
+import { WiThermometer, WiStrongWind, WiRaindrop, WiHumidity } from "react-icons/wi";
 
 /** ===== Types for OpenWeather responses (minimal fields you use) ===== */
 type WeatherNow = {
@@ -28,14 +31,16 @@ const API_KEY =
   import.meta.env.VITE_OPENWEATHER_KEY || "cd80adfd71e8991d53ad29edd68abd19";
 const FALLBACK_CITY = "Johannesburg";
 
-export default function WeatherHome() {
-  const [city, setCity] = useState<string>("");
+interface Props { externalCity?: string }
+
+export default function WeatherHome({ externalCity }: Props) {
   const [weatherData, setWeatherData] = useState<WeatherNow | null>(null);
   const [forecastData, setForecastData] = useState<Forecast5d | null>(null);
   const [error, setError] = useState<string>("");
-  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [, setSelectedDate] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [savedLocations, setSavedLocations] = useState<SavedLocation[]>([]);
+  const { unit, isDarkTheme } = useSettings();
 
   // ✅ Save city to localStorage
   const saveLastCity = (cityName: string) => {
@@ -82,6 +87,14 @@ export default function WeatherHome() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // When externalCity is provided (from header search), fetch that city
+  useEffect(() => {
+    if (externalCity && externalCity.trim()) {
+      void fetchWeatherByCity(externalCity.trim());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [externalCity]);
 
   const fetchWeatherByCity = async (cityName: string) => {
     if (!cityName) return;
@@ -183,58 +196,61 @@ export default function WeatherHome() {
     );
   };
 
-  const handleSearch = () => {
-    void fetchWeatherByCity(city);
-  };
-
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Weather App</h1>
-
-      <div className={styles.inputGroup}>
-        <input
-          type="text"
-          placeholder="Enter city"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          className={styles.input}
-        />
-        <button onClick={handleSearch} className={styles.button}>
-          Search
-        </button>
-      </div>
+    <div className={`${styles.dashboard} ${isDarkTheme ? styles.dark : styles.light}`}>
 
       {error && <p className={styles.error}>{error}</p>}
       {loading && <p className={styles.loading}>Loading weather...</p>}
 
       {!loading && weatherData && (
-        <div className={styles.weatherInfo}>
-          <h2 className={styles.weatherTitle}>{weatherData.name}</h2>
-          <p>🌡️ Temperature: {weatherData.main.temp}°C</p>
-          <div className={styles.condition}>
-            <img
-              src={`https://openweathermap.org/img/wn/${weatherData.weather?.[0]?.icon}@2x.png`}
-              alt={weatherData.weather?.[0]?.description ?? "weather icon"}
-            />
-            <p>{weatherData.weather?.[0]?.description}</p>
+        <section className={styles.hero}>
+          <div className={styles.heroLeft}>
+            <h2 className={styles.sectionTitle}>Today's Weather Forecast</h2>
+            <p className={styles.subtle}>{new Date().toLocaleString()}</p>
+            <p className={styles.heroCity}>{weatherData.name}</p>
+            <div className={styles.tempBlock}>
+              <span className={styles.bigTemp}>{formatTemp(weatherData.main.temp, unit)}</span>
+              <span className={styles.feels}>Feels {formatTemp(weatherData.main.temp, unit)}</span>
+            </div>
           </div>
-          <p>💨 Wind: {weatherData.wind.speed} m/s</p>
 
-          <button className={styles.saveButton} onClick={handleSaveCity}>
-            ⭐ Save Location
-          </button>
-        </div>
+          <div className={styles.heroRight}>
+            <div className={styles.heroIconWrap}>
+              <img
+                src={`https://openweathermap.org/img/wn/${weatherData.weather?.[0]?.icon ?? '01d'}@2x.png`}
+                alt={weatherData.weather?.[0]?.description ?? 'weather'}
+              />
+            </div>
+            <div className={styles.metricsList}>
+              <div className={styles.metric}><WiRaindrop /> Precipitation: 80%</div>
+              <div className={styles.metric}><WiHumidity /> Humidity: {weatherData.main.humidity ?? 0}%</div>
+              <div className={styles.metric}><WiStrongWind /> Wind: {weatherData.wind.speed} m/s</div>
+            </div>
+            <button className={styles.saveButton} onClick={handleSaveCity}>Save Location</button>
+          </div>
+        </section>
       )}
 
-      {!loading && forecastData && selectedDate && (
-        <>
+      {!loading && forecastData && (
+        <section className={styles.glassPanel}>
+          <div className={styles.tabBar}>
+            <button className={styles.tabActive}><WiThermometer /> Temperature</button>
+            <button className={styles.tab}><WiStrongWind /> Wind</button>
+            <button className={styles.tab}><WiRaindrop /> Precipitation</button>
+            <button className={styles.tab}><WiHumidity /> Humidity</button>
+          </div>
           <DayForecast forecastData={forecastData} />
-          <WeekForecast
-            forecastData={forecastData}
-            onSelectDay={setSelectedDate}
-          />
-        </>
+        </section>
       )}
+
+      {!loading && forecastData && (
+        <section className={styles.weekSection}>
+          <h3 className={styles.sectionTitle}>Weekly Forecast</h3>
+          <WeekForecast forecastData={forecastData} onSelectDay={setSelectedDate} />
+        </section>
+      )}
+
+      
     </div>
   );
 }

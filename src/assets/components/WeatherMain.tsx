@@ -1,17 +1,17 @@
-
-import Sidebar from './SideBar';
 import WeatherHome from './WeatherHome';
-import styles from './WeatherMain.module.css';
+import styles from './Weathermain.module.css';
+
+interface Props {
+  externalCity?: string;
+}
 
 
 
-export default function WeatherMain() {
+export default function WeatherMain({ externalCity }: Props) {
   return (
     <>
     <div className={styles.maincomponent}> 
-      <Sidebar />
-      <WeatherHome />
-      
+      <WeatherHome externalCity={externalCity} />
     </div>
     </>
   );
