@@ -6,7 +6,7 @@
   justify-content: space-between;
   padding: 1rem;
   background: linear-gradient(to right, #00f2fe, #4facfe);
-  color: var(--header-color, #333);
+  color: var(--text-primary);
   gap: 0.75rem;
   flex-wrap: nowrap;
 }
@@ -22,6 +22,7 @@
   margin: 0;
   min-width: 150px;
   flex-grow: 1;
+  color: var(--text-primary);
 }
 
 /* New: hamburger and brand */
@@ -34,7 +35,7 @@
   border-radius: 8px;
   border: none;
   background: rgba(255, 255, 255, 0.25);
-  color: #0b1220;
+  color: var(--text-primary);
   cursor: pointer;
 }
 
@@ -53,7 +54,7 @@
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  color: #334155;
+  color: var(--text-secondary);
 }
 
 .searchInput {
@@ -61,10 +62,10 @@
   height: 40px;
   padding: 0 12px 0 40px;
   border-radius: 999px;
-  border: none;
+  border: 1px solid var(--border-color);
   outline: none;
-  background: rgba(255, 255, 255, 0.85);
-  color: #0b1220;
+  background: var(--input-bg);
+  color: var(--text-primary);
 }
 
 .actions {
@@ -83,7 +84,7 @@
   border: 1px solid rgba(255,255,255,0.25);
   padding: 6px 10px;
   border-radius: 999px;
-  color: #0b1220;
+  color: var(--text-primary);
   font-weight: 600;
 }
 
@@ -102,40 +103,26 @@
 
 .unitButtons button {
   padding: 0.4rem 0.8rem;
-  border: none;
+  border: 1px solid var(--border-color);
   cursor: pointer;
-  background-color: #ddd;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
   border-radius: 5px;
   transition: background-color 0.2s ease;
 }
 
 .unitButtons button:hover {
-  background-color: #ccc;
+  background-color: var(--bg-tertiary);
 }
 
 .activeButton {
-  background-color: #2196f3;
-  color: white;
+  background-color: var(--button-bg) !important;
+  color: white !important;
 }
 
 /* 🌙 Dark Theme */
 body.dark-theme .header {
-  background-color: #1e1e1e;
-  color: white;
-}
-
-body.dark-theme .unitButtons button {
-  background-color: #333;
-  color: white;
-}
-
-body.dark-theme .unitButtons button:hover {
-  background-color: #444;
-}
-
-body.dark-theme .activeButton {
-  background-color: #2196f3;
-  color: white;
+  background: linear-gradient(to right, #1a237e, #283593);
 }
 
 /* 📱 Tablets (≥ 481px) */

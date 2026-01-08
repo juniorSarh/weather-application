@@ -3,9 +3,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: radial-gradient(1200px 600px at 20% -10%, rgba(255,255,255,.08), transparent 60%),
-              radial-gradient(1000px 500px at 120% 10%, rgba(255,255,255,.06), transparent 60%),
-              linear-gradient(180deg, #0b1220 0%, #0b1220 60%, #0e1628 100%);
+  background: var(--bg-primary);
   position: relative;
   overflow: hidden;
 }
@@ -17,19 +15,19 @@
   inset: 0;
   pointer-events: none;
   background-image:
-    radial-gradient(2px 8px at 12% 20%, rgba(255,255,255,0.07) 20%, transparent 21%),
-    radial-gradient(2px 10px at 78% 35%, rgba(255,255,255,0.06) 20%, transparent 21%),
-    radial-gradient(2px 9px at 45% 60%, rgba(255,255,255,0.05) 20%, transparent 21%),
-    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    radial-gradient(2px 8px at 12% 20%, var(--bg-tertiary) 20%, transparent 21%),
+    radial-gradient(2px 10px at 78% 35%, var(--bg-tertiary) 20%, transparent 21%),
+    radial-gradient(2px 9px at 45% 60%, var(--bg-tertiary) 20%, transparent 21%),
+    linear-gradient(180deg, var(--bg-tertiary), var(--bg-secondary));
   mix-blend-mode: screen;
-  opacity: 0.5;
+  opacity: 0.1;
 }
 
 .contentArea {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px;
-  padding: 12px;
+  gap: 8px;
+  padding: 8px;
 }
 
 /* Desktop sidebar visible */
@@ -49,7 +47,7 @@
 .drawerOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.45);
+  background: var(--shadow-color);
   z-index: 50;
   display: flex;
 }
@@ -57,17 +55,17 @@
 .drawer {
   width: 270px;
   max-width: 85vw;
-  background: #0b1220;
-  border-right: 1px solid #1f2937;
+  background: var(--card-bg);
+  border-right: 1px solid var(--border-color);
   height: 100vh;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  box-shadow: 0 8px 24px var(--shadow-color);
   animation: slideIn .2s ease-out both;
 }
 
 .drawerHeader { display: flex; justify-content: flex-end; padding: 8px; }
 .closeBtn {
-  width: 36px; height: 36px; border-radius: 8px; border: none; cursor: pointer;
-  color: #e5e7eb; background: #1f2937;
+  width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border-color); cursor: pointer;
+  color: var(--text-primary); background: var(--bg-secondary);
 }
 
 @keyframes slideIn {

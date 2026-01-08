@@ -4,6 +4,7 @@
   height: 865px;
   overflow: hidden;
   width: 100vh;
+  background: var(--bg-primary);
 }
 
 .sidebarWrapper {

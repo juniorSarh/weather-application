@@ -2,11 +2,11 @@
 .container {
   width: 100%;
   max-width: 600px;
-  margin: 15px auto; /* Center the container horizontally */
+  margin: 15px auto;
   padding: 1.5rem;
-  background: linear-gradient(to right, #00f2fe, #4facfe);
+  background: var(--bg-secondary);
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px var(--shadow-color);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   box-sizing: border-box;
 }
@@ -15,7 +15,7 @@
   text-align: center;
   font-size: 1.5rem;
   margin-bottom: 1.2rem;
-  color: #f8f8f8;
+  color: var(--text-primary);
 }
 
 .inputGroup {
@@ -29,20 +29,22 @@
 
 .input,
 .button {
-  width: 100%; /* full width on small screens */
+  width: 100%;
   box-sizing: border-box;
 }
 
 .input {
   padding: 0.6rem 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--input-border);
   border-radius: 6px;
   font-size: 1rem;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
 }
 
 .button {
   padding: 0.6rem 1.2rem;
-  background-color: #4a90e2;
+  background-color: var(--button-bg);
   color: white;
   border: none;
   border-radius: 6px;
@@ -52,7 +54,7 @@
 }
 
 .button:hover {
-  background-color: #357bd8;
+  background-color: var(--button-hover);
 }
 
 .error {
@@ -63,17 +65,18 @@
 }
 
 .weatherInfo {
-  background-color: #fff;
+  background-color: var(--card-bg);
   border-radius: 8px;
   padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px var(--shadow-color);
   text-align: center;
+  border: 1px solid var(--border-color);
 }
 
 .weatherTitle {
   font-size: 1.25rem;
   margin-bottom: 1rem;
-  color: #222;
+  color: var(--text-primary);
 }
 
 .saveButton {
@@ -90,7 +93,6 @@
   background-color: #388e3c;
 }
 
-
 ul {
   list-style: none;
   padding: 0;
@@ -99,17 +101,18 @@ ul {
 
 li {
   padding: 0.6rem 0;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--border-color);
   cursor: pointer;
+  color: var(--text-primary);
 }
 
 li:hover {
-  background-color: #eef2f7;
+  background-color: var(--bg-tertiary);
 }
 
 .loading {
   text-align: center;
-  color: #555;
+  color: var(--text-muted);
   font-style: italic;
   margin-top: 1rem;
 }
@@ -120,182 +123,7 @@ li:hover {
   justify-content: center;
   gap: 0.5rem;
   text-transform: capitalize;
-}
-
-/* 🔒 Specific safeguard for very small screens */
-@media (max-width: 374px) {
-  .input {
-    font-size: 0.85rem;
-  }
-
-  .button {
-    font-size: 0.85rem;
-  }
-}
-
-/* 📱 Medium devices (≥768px) */
-@media (min-width: 768px) {
-  .container {
-    width: 85%;
-    padding: 2rem;
-    max-width: 800px;
-  }
-
-  .title {
-    font-size: 1.75rem;
-  }
-
-  .inputGroup {
-    flex-direction: row;
-  }
-
-  .input {
-    flex: 1;
-    width: auto;
-  }
-
-  .button {
-    width: auto;
-  }
-
-  .weatherTitle {
-    font-size: 1.5rem;
-  }
-}
-
-/* 💻 Large devices (≥1024px) */
-@media (min-width: 1024px) {
-  .container {
-    width: 70%;
-    max-width: 2000px;
-  }
-
-  .title {
-    font-size: 2rem;
-  }
-}
-/* ✅ Base styles (Mobile-first, 320px and up) */
-.container {
-  width: 100%;
-  max-width: 600px;
-  margin: 15px auto; /* Center the container horizontally */
-  padding: 1.5rem;
-  background: linear-gradient(to right, #00f2fe, #4facfe);
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  box-sizing: border-box;
-}
-
-.title {
-  text-align: center;
-  font-size: 1.5rem;
-  margin-bottom: 1.2rem;
-  color: #f8f8f8;
-}
-
-.inputGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-  width: 100%;
-}
-
-.input,
-.button {
-  width: 100%; /* full width on small screens */
-  box-sizing: border-box;
-}
-
-.input {
-  padding: 0.6rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-}
-
-.button {
-  padding: 0.6rem 1.2rem;
-  background-color: #4a90e2;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background 0.3s ease;
-}
-
-.button:hover {
-  background-color: #357bd8;
-}
-
-.error {
-  color: #d33;
-  text-align: center;
-  margin-top: -1rem;
-  margin-bottom: 1rem;
-}
-
-.weatherInfo {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  text-align: center;
-}
-
-.weatherTitle {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-  color: #222;
-}
-
-.saveButton {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.saveButton:hover {
-  background-color: #388e3c;
-}
-
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-li {
-  padding: 0.6rem 0;
-  border-bottom: 1px solid #ddd;
-  cursor: pointer;
-}
-
-li:hover {
-  background-color: #eef2f7;
-}
-
-.loading {
-  text-align: center;
-  color: #555;
-  font-style: italic;
-  margin-top: 1rem;
-}
-
-.condition {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  text-transform: capitalize;
+  color: var(--text-primary);
 }
 
 /* 🔒 Specific safeguard for very small screens */
@@ -351,38 +179,39 @@ li:hover {
   }
 }
 
-/* remove dark dashboard additions - revert to original up to line 176 */
-
-/* ===== New Dashboard Styles (match mock) ===== */
+/* ===== Dashboard Styles ===== */
 .dashboard {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 12px 16px 32px;
-  color: #e5e7eb;
+  color: var(--text-primary);
 }
 
-/* Theme modifiers */
-.dark { color: #e5e7eb; }
-.light { color: #0f172a; }
-
-.searchRow { display: flex; justify-content: center; margin: 8px 0 16px; }
-
-/* Override form controls to glass look */
-.inputGroup { display: inline-flex; gap: 8px; width: 100%; max-width: 680px; }
-.input {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.18);
-  color: #e5e7eb;
-  backdrop-filter: blur(6px);
-}
-.button {
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.2);
+.searchRow { 
+  display: flex; 
+  justify-content: center; 
+  margin: 8px 0 16px; 
 }
 
-.sectionTitle { color: #a1c6ff; margin: 0 0 6px; font-weight: 700; }
-.subtle { color: #9ca3af; margin: 0 0 12px; }
+/* Override form controls */
+.inputGroup { 
+  display: inline-flex; 
+  gap: 8px; 
+  width: 100%; 
+  max-width: 680px; 
+}
+
+.sectionTitle { 
+  color: var(--text-primary); 
+  margin: 0 0 6px; 
+  font-weight: 700; 
+}
+
+.subtle { 
+  color: var(--text-muted); 
+  margin: 0 0 12px; 
+}
 
 .hero {
   display: grid;
@@ -390,22 +219,50 @@ li:hover {
   gap: 16px;
   padding: 20px;
   border-radius: 16px;
-  background: radial-gradient(800px 400px at 10% -50%, rgba(255,255,255,0.06), transparent 60%),
-              rgba(17, 24, 39, 0.55);
-  border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.35) inset, 0 6px 18px rgba(0,0,0,0.25);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px var(--shadow-color);
 }
 
 .heroLeft { display: flex; flex-direction: column; }
 .tempBlock { display: flex; align-items: baseline; gap: 12px; }
-.bigTemp { font-size: 56px; line-height: 1; font-weight: 800; color: #ffffff; }
-.feels { color: #a3b6d6; font-weight: 600; }
-.heroCity { font-size: 1.2rem; font-weight: 700; color: #dbeafe; margin: 4px 0 8px; }
+.bigTemp { 
+  font-size: 56px; 
+  line-height: 1; 
+  font-weight: 800; 
+  color: var(--text-primary); 
+}
+.feels { 
+  color: var(--text-muted); 
+  font-weight: 600; 
+}
+.heroCity { 
+  font-size: 1.2rem; 
+  font-weight: 700; 
+  color: var(--text-primary); 
+  margin: 4px 0 8px; 
+}
 
 .heroRight { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
-.heroIconWrap { width: 120px; height: 120px; background: rgba(255,255,255,0.08); border-radius: 16px; display:flex; align-items:center; justify-content:center; }
-.metricsList { display: grid; gap: 6px; color: #cbd5e1; }
-.metric { display: inline-flex; align-items: center; gap: 8px; }
+.heroIconWrap { 
+  width: 120px; 
+  height: 120px; 
+  background: var(--bg-tertiary); 
+  border-radius: 16px; 
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+}
+.metricsList { 
+  display: grid; 
+  gap: 6px; 
+  color: var(--text-secondary); 
+}
+.metric { 
+  display: inline-flex; 
+  align-items: center; 
+  gap: 8px; 
+}
 
 @media (min-width: 900px) {
   .hero { grid-template-columns: 1.2fr 1fr; }
@@ -415,30 +272,60 @@ li:hover {
 .glassPanel {
   margin-top: 18px;
   padding: 12px 12px 4px;
-  background: rgba(17, 24, 39, 0.55);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 12px var(--shadow-color);
 }
 
-.tabBar { display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
-.tab, .tabActive {
-  display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.14);
-  background: rgba(255,255,255,0.06); color: #dbeafe; cursor: pointer;
+.tabBar { 
+  display: flex; 
+  gap: 8px; 
+  margin-bottom: 8px; 
+  flex-wrap: wrap; 
 }
-.tabActive { background: rgba(59,130,246,0.25); border-color: rgba(59,130,246,0.45); }
+
+.tab, .tabActive {
+  display: inline-flex; 
+  align-items: center; 
+  gap: 6px; 
+  height: 36px; 
+  padding: 0 12px; 
+  border-radius: 10px; 
+  border: 1px solid var(--border-color);
+  background: var(--bg-tertiary); 
+  color: var(--text-primary); 
+  cursor: pointer;
+}
+
+.tabActive { 
+  background: var(--button-bg); 
+  border-color: var(--button-bg); 
+  color: white;
+}
 
 .weekSection { margin-top: 22px; }
-.actionsRow { display:flex; justify-content:flex-end; margin-top: 12px; }
-.saveButton { background: rgba(34,197,94,0.2); border: 1px solid rgba(34,197,94,0.45); color: #dcfce7; }
-.saveButton {
+.actionsRow { 
+  display:flex; 
+  justify-content:flex-end; 
+  margin-top: 12px; 
+}
+
+.saveButton { 
+  background: #4caf50; 
+  border: 1px solid #4caf50; 
+  color: white; 
   padding: 10px 14px;
   border-radius: 10px;
-  backdrop-filter: blur(6px);
   transition: transform .15s ease, background .15s ease;
   align-self: flex-start;
 }
-.saveButton:hover { transform: translateY(-1px); background: rgba(34,197,94,0.28); }
+
+.saveButton:hover { 
+  transform: translateY(-1px); 
+  background: #388e3c; 
+}
+
 @media (min-width: 900px) {
   .saveButton { align-self: flex-end; }
 }

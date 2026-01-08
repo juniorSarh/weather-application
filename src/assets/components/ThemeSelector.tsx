@@ -9,11 +9,12 @@ const ThemeSelector = () => {
   <button
   style={{
     padding: '0.4rem 0.8rem',
-    border: 'none',
+    border: '1px solid var(--border-color)',
     cursor: 'pointer',
     borderRadius: '5px',
-    backgroundColor: '#ddd',
-    transition: 'background-color 0.2s',
+    backgroundColor: 'var(--bg-secondary)',
+    color: 'var(--text-primary)',
+    transition: 'background-color 0.2s, color 0.2s',
   }}
   onClick={toggleTheme}
 >

@@ -4,16 +4,12 @@
   margin: 1rem;
   padding: 1.25rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  background-color: #fff;
-  color: #000;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  background-color: var(--card-bg);
+  color: var(--text-primary);
   transition: background-color 0.3s, color 0.3s;
   box-sizing: border-box;
-}
-
-body.dark-theme .settingsCard {
-  background-color: #1e1e1e;
-  color: white;
+  border: 1px solid var(--border-color);
 }
 
 .settingsHeader {
@@ -42,29 +38,17 @@ body.dark-theme .settingsCard {
 .unitButtons button,
 .settingItem button {
   padding: 0.4rem 0.8rem;
-  border: none;
+  border: 1px solid var(--border-color);
   cursor: pointer;
   border-radius: 5px;
-  background-color: #ddd;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
   transition: background-color 0.2s;
 }
 
 .unitButtons button.active,
 .settingItem button.active {
-  background-color: #2196f3;
-  color: white;
-}
-
-/* Dark theme button overrides */
-body.dark-theme .unitButtons button,
-body.dark-theme .settingItem button {
-  background-color: #333;
-  color: white;
-}
-
-body.dark-theme .unitButtons button.active,
-body.dark-theme .settingItem button.active {
-  background-color: #2196f3;
+  background-color: var(--button-bg);
   color: white;
 }
 
