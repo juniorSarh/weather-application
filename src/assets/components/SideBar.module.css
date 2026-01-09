@@ -1,16 +1,19 @@
 /* 🌐 Base styles: Mobile-first (starting at 320px) */
 .sidebar {
-  width: 100%;
-  padding: 12px;
-  margin: 2px 0;
+  width: 88px;
+  padding: 12px 8px;
+  margin: 4px;
   box-sizing: border-box;
-  height: auto;
+  height: 415vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  background: var(--bg-secondary);
+  justify-content: flex-start;
+  background: linear-gradient(to right, #00f2fe, #4facfe);
   border: 1px solid var(--border-color);
   border-radius: 12px;
+  position: sticky;
+  top: 6px;
 }
 
 /* Navigation links (mobile-first) */
@@ -18,13 +21,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 8px;
+  padding: 12px 8px;
   text-decoration: none;
   color: var(--text-primary);
-  margin-right: 0.5rem;
-  border-radius: 10px;
+  margin: 0 0 8px 0;
+  border-radius: 8px;
   transition: background-color 0.2s ease;
-  min-width: 60px;
+  min-width: auto;
+  width: 100%;
+  justify-content: center;
 }
 
 .navLink:hover { 
@@ -32,8 +37,60 @@
 }
 
 .navIcon { 
-  font-size: 22px; 
-  margin-bottom: 4px; 
+  font-size: 20px; 
+  margin-bottom: 3px; 
+}
+
+/* 📱 Small screens (320px - 480px) */
+@media (max-width: 480px) {
+  .sidebar {
+    padding: 10px 6px;
+    height: auto;
+    position: relative;
+    top: auto;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    margin: 2px 0;
+  }
+  
+  .navLink {
+    padding: 8px 6px;
+    min-width: 45px;
+    margin: 0 2px;
+    width: auto;
+    flex: 1;
+  }
+  
+  .navIcon {
+    font-size: 18px;
+  }
+}
+
+/* 📱 Medium screens (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .sidebar {
+    padding: 11px 7px;
+    height: auto;
+    position: relative;
+    top: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin: 2px 0;
+  }
+  
+  .navLink {
+    padding: 10px 8px;
+    min-width: 55px;
+    margin: 0 4px;
+    width: auto;
+    flex: 1;
+  }
+  
+  .navIcon {
+    font-size: 20px;
+  }
 }
 
 /* 📱 Tablets and up (≥768px) */
@@ -44,22 +101,36 @@
     height: 95vh;
     margin: 4px;
     align-items: center;
+    justify-content: flex-start;
     position: sticky;
     top: 6px;
+    padding: 12px 8px;
   }
 
   .navLink { 
     width: 100%; 
-    margin-right: 0; 
-    margin-bottom: 8px; 
+    margin: 0 0 8px 0; 
     justify-content: center; 
+    padding: 12px 8px;
+    min-width: auto;
+    flex: none;
   }
 }
 
-/* 💻 Desktops and up (≥1024px) */
-@media (min-width: 1024px) {
+/* 💻 Large desktops (≥1200px) */
+@media (min-width: 1200px) {
   .sidebar { 
-    width: 88px; 
+    width: 100px; 
     height: 96vh; 
+    padding: 16px 12px;
+  }
+  
+  .navLink {
+    padding: 14px 10px;
+  }
+  
+  .navIcon {
+    font-size: 24px;
+    margin-bottom: 6px;
   }
 }

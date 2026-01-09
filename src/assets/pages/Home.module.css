@@ -26,8 +26,8 @@
 .contentArea {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 8px;
-  padding: 8px;
+  gap: 2px;
+  padding: 1px;
 }
 
 /* Desktop sidebar visible */

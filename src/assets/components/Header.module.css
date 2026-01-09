@@ -75,7 +75,7 @@
   flex: 0 0 auto;
 }
 
-/* Location chip and avatar */
+/* Location chip */
 .location {
   display: inline-flex;
   align-items: center;
@@ -86,14 +86,6 @@
   border-radius: 999px;
   color: var(--text-primary);
   font-weight: 600;
-}
-
-.avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 999px;
-  border: 2px solid rgba(255,255,255,0.6);
-  object-fit: cover;
 }
 
 .unitButtons {

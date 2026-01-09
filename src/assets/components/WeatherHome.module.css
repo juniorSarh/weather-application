@@ -319,11 +319,27 @@ li:hover {
   border-radius: 10px;
   transition: transform .15s ease, background .15s ease;
   align-self: flex-start;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 14px;
 }
 
 .saveButton:hover { 
   transform: translateY(-1px); 
   background: #388e3c; 
+}
+
+.saveButton.saved {
+  background: #ffc107;
+  border: 1px solid #ffc107;
+  color: #000;
+}
+
+.saveButton.saved:hover {
+  background: #e0a800;
 }
 
 @media (min-width: 900px) {

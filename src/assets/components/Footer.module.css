@@ -4,7 +4,7 @@
   justify-content: center;
   background: var(--bg-secondary);
   padding: 16px;
-  box-shadow: 0 -2px 4px var(--shadow-color);
+ background: linear-gradient(to right, #00f2fe, #4facfe);
   width: 100%;
   border-top: 1px solid var(--border-color);
 }

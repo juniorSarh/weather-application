@@ -5,7 +5,7 @@ import DayForecast from "./DayForecast";
 import type { SavedLocation } from "../../types";
 import { useSettings } from "../context/SettingsContext";
 import { formatTemp } from "../utils/units";
-import { WiThermometer, WiStrongWind, WiRaindrop, WiHumidity } from "react-icons/wi";
+import { WiThermometer, WiStrongWind, WiRaindrop, WiHumidity, WiStars } from "react-icons/wi";
 
 /** ===== Types for OpenWeather responses (minimal fields you use) ===== */
 type WeatherNow = {
@@ -75,6 +75,11 @@ export default function WeatherHome({ externalCity }: Props) {
       setSavedLocations(updatedLocations);
       saveLocationsToStorage(updatedLocations);
     }
+  };
+
+  // ✅ Check if city is already saved
+  const isCitySaved = () => {
+    return weatherData?.name ? savedLocations.some((loc) => loc.name === weatherData.name) : false;
   };
 
   useEffect(() => {
@@ -226,7 +231,13 @@ export default function WeatherHome({ externalCity }: Props) {
               <div className={styles.metric}><WiHumidity /> Humidity: {weatherData.main.humidity ?? 0}%</div>
               <div className={styles.metric}><WiStrongWind /> Wind: {weatherData.wind.speed} m/s</div>
             </div>
-            <button className={styles.saveButton} onClick={handleSaveCity}>Save Location</button>
+            <button 
+              className={`${styles.saveButton} ${isCitySaved() ? styles.saved : ''}`} 
+              onClick={handleSaveCity}
+              disabled={isCitySaved()}
+            >
+              {isCitySaved() ? <WiStars /> : 'Save Location'}
+            </button>
           </div>
         </section>
       )}

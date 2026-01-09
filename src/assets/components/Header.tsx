@@ -49,7 +49,6 @@ const Header: React.FC<HeaderProps> = ({ title = 'Weather Application', onHambur
           <FiMapPin />
           <span>{lastCity || 'Select location'}</span>
         </div>
-        <img className={styles.avatar} src="/src/assets/weather.png" alt="User" />
         <ThemeSelector />
 
         <div className={styles.unitButtons}>

@@ -3,15 +3,20 @@
   flex-direction: row;
   height: 865px;
   overflow: hidden;
-  width: 100vh;
+  width: 100%;
   background: var(--bg-primary);
 }
 
 .sidebarWrapper {
-  width: 850px;
+  width: 88px;
+  flex-shrink: 0;
 }
 .savedLocationsWrapper {
   display: flex;
-  flex-direction: column;
-  width: 80vh;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: calc(100% - 88px);
+  padding: 1rem;
+  gap: 1rem;
+  align-content: flex-start;
 }
