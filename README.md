@@ -4,36 +4,35 @@
 
 # 🌦️ React Weather App
 
-A modern, responsive weather application built with **React + TypeScript** that displays current weather conditions, hourly forecasts, and weekly forecasts using the **OpenWeatherMap API**. It includes features such as geolocation detection, search and save favorite locations, theme customization, display unit switching, offline caching, and weather alerts.
+A modern, responsive weather application built with **React + TypeScript** that displays current weather conditions, hourly forecasts, and weekly forecasts using the **OpenWeatherMap API**. It includes features such as geolocation detection, search and save favorite locations,and theme customization, display unit switching.
 
 # Live Demo
-Find the live demo on this link https://weather-application-5r2t.onrender.com
+Find the live demo on this link.... https://weather-application-5r2t.onrender.com
 
 ---
 ## 🔐 Setup Instructions
 
 ### 1. Clone the repository
 
-```bash
-git clone https://github.com/your-username/weather-app.git
+```
+git clone https://github.com/juniorSarh/weather-application.git
 cd weather-app
-2. Install dependencies
-bash
-Copy code
+```
+### 2. Install dependencies
+```
 npm install
 # or
 yarn
-3. Add API Key
+```
+### 3. Add API Key
+```
 Create a .env file in the root with:
 
-env
-Copy code
 VITE_WEATHER_API_KEY=your_openweathermap_api_key
 Replace your_openweathermap_api_key with your actual API key from https://openweathermap.org/api
-
-4. Start development server
-bash
-Copy code
+```
+### 4. Start development server
+```
 npm run dev
 # or
 yarn dev
